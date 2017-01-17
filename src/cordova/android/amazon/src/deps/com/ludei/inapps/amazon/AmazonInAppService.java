@@ -145,7 +145,7 @@ public class AmazonInAppService extends AbstractInAppService implements Purchasi
                     product.productId = i.getSku();
                     product.title = i.getTitle();
                     product.description = i.getDescription();
-                    product.currency = ""; // does not exist in amazon
+                    // product.currency = ""; // does not exist in amazon
 
                     String localizedPrice = i.getPrice();
                     String price = localizedPrice.replaceAll("[^\\d.]", "");
