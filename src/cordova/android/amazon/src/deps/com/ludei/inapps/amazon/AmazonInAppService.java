@@ -13,6 +13,7 @@ import com.amazon.device.iap.model.PurchaseUpdatesResponse;
 import com.amazon.device.iap.model.Receipt;
 import com.amazon.device.iap.model.RequestId;
 import com.amazon.device.iap.model.UserDataResponse;
+import com.amazon.device.iap.model.FulfillmentResult;
 import com.ludei.inapps.*;
 
 import java.util.ArrayList;
@@ -71,8 +72,8 @@ public class AmazonInAppService extends AbstractInAppService implements Purchasi
     }
 
     @Override
-    public void consume(String productId, int quantity, ConsumeCallback callback) {
-
+    public void consume(String receiptId, int quantity, ConsumeCallback callback) {
+        PurchasingService.notifyFulfillment(receiptId, FulfillmentResult.FULFILLED);
     }
 
     @Override
@@ -145,7 +146,7 @@ public class AmazonInAppService extends AbstractInAppService implements Purchasi
                     product.title = i.getTitle();
                     product.description = i.getDescription();
                     product.currency = ""; // does not exist in amazon
- 
+
                     String localizedPrice = i.getPrice();
                     String price = localizedPrice.replaceAll("[^\\d.]", "");
                     try {
